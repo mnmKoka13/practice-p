@@ -1,6 +1,10 @@
 import java.util.*;
 
 public class Main {
+    /**
+     * paiza Cランク練習問題
+     * クラスの作成 Java編
+     */
     public static void main(String[] args) throws Exception {
         Scanner sc = new Scanner(System.in);
         
