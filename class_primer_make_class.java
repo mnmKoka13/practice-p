@@ -6,30 +6,34 @@ public class Main {
         
         int N = sc.nextInt();
         
-        ArrayList<employee> employeeList = new ArrayList<employee>();
+        ArrayList<Employee> employeeList = new ArrayList<Employee>();
         
         for(int i = 0; i < N; i++) {
             String command = sc.next();
             if (command.equals("make")) {
-                employee e = new employee();
-                e.number = sc.nextInt();
-                e.name = sc.next();
-                employeeList.add(e);
+                int number = sc.nextInt();
+                String name = sc.next();
+                employeeList.add(new Employee(number, name));
             } else if (command.equals("getnum")) {
-                int line = sc.nextInt() - 1;
-                System.out.println(employeeList.get(line).getNumber());
+                int index = sc.nextInt() - 1;
+                System.out.println(employeeList.get(index).getNumber());
             } else {
-                int line = sc.nextInt() - 1;
-                System.out.println(employeeList.get(line).getName());
+                int index = sc.nextInt() - 1;
+                System.out.println(employeeList.get(index).getName());
             }
         }
     }
 }
 
-class employee {
+class Employee {
     int number;
     String name;
     
+    Employee(int number, String name){
+        this.number = number;
+        this.name = name;
+    }
+
     public int getNumber() {
         return this.number;
     }
