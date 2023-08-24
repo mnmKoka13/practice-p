@@ -3,7 +3,8 @@ import java.util.*;
 public class Main {
     /**
      * paiza Cランク練習問題
-     * クラスの作成 Java編
+     * クラスの作成
+     * クラスのメンバの更新
      */
     public static void main(String[] args) throws Exception {
         Scanner sc = new Scanner(System.in);
@@ -21,9 +22,17 @@ public class Main {
             } else if (command.equals("getnum")) {
                 int index = sc.nextInt() - 1;
                 System.out.println(employeeList.get(index).getNumber());
-            } else {
+            } else if (command.equals("getname")) {
                 int index = sc.nextInt() - 1;
                 System.out.println(employeeList.get(index).getName());
+            } else if (command.equals("change_num")) {
+                int index = sc.nextInt() - 1;
+                int newNum = sc.nextInt();
+                employeeList.get(index).changeNumber(newNum);
+            } else {
+                int index = sc.nextInt();
+                String newName = sc.next();
+                employeeList.get(index).changeName(newName);
             }
         }
     }
@@ -44,5 +53,13 @@ class Employee {
     
     public String getName() {
         return this.name;
+    }
+
+    public void changeNumber(int newNum) {
+        this.number = newNum;
+    }
+
+    public void changeName(String newName) {
+        this.name = newName;
     }
 }
