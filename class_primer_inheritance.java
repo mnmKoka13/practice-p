@@ -6,41 +6,42 @@ import java.util.*;
  */
 
 class Customer {
-    int old;
-    int orderTotalPrice;
+    int amount;
 
-    Customer(int old) {
-        this.old = old;
-        this.orderTotalPrice = 0;
+    Customer() {
+        this.amount = 0;
     }
 
-    public void order(String type, int price) {
-        this.orderTotalPrice = this.orderTotalPrice + price;
+    public void takeFood(int m) {
+        this.amount += m;
     }
+
+    public void takeSoftDrink(int m) {
+        this.amount += m;
+    }
+
+    public void takeAlcohol(int m) {}
 }
 
 class AdultCustomer extends Customer {
 
-    boolean orderedAlcohol;
+    boolean drunk;
 
-    AdultCustomer(int old) {
-        super(old);
-        this.orderedAlcohol = false;
+    AdultCustomer() {
+        super();
+        this.drunk = false;
     }
 
-    public void order(String type, int price) {
-        if (type.equals("alcohol")) {
-            if (this.old < 20) {
-                price = 0;
-            } else {
-                this.orderedAlcohol = true;
-            }
-        } else {
-            if (orderedAlcohol) {
-                price = price - 200;
-            }
+    public void takeFood(int m) {
+        if (drunk) {
+            m -= 200;
         }
-        this.orderTotalPrice = this.orderTotalPrice + price;
+        super.takeFood(m);
+    }
+
+    public void takeAlcohol(int m) {
+        drunk = true;
+        amount += m;
     }
 }
 
@@ -51,15 +52,15 @@ public class Main {
         int N = sc.nextInt();
         int K = sc.nextInt();
 
-        ArrayList<Customer> customers = new ArrayList<Customer>();
+        ArrayList<Customer> customers = new ArrayList<>();
 
         for (int i = 0; i < N; i++) {
             int old = sc.nextInt();
             if (old >= 20) {
-                AdultCustomer customer = new AdultCustomer(old);
+                AdultCustomer customer = new AdultCustomer();
                 customers.add(customer);
             } else {
-                Customer customer = new AdultCustomer(old);
+                Customer customer = new AdultCustomer();
                 customers.add(customer);
             }
         }
@@ -69,11 +70,17 @@ public class Main {
             String order = sc.next();
             int price = sc.nextInt();
             
-            customers.get(index).order(order, price);
+            if (order.equals("food")) {
+                customers.get(index).takeFood(price);
+            } else if (order.equals("softdrink")) {
+                customers.get(index).takeSoftDrink(price);
+            } else {
+                customers.get(index).takeAlcohol(price);
+            }
         }
 
         for (Customer c : customers) {
-            System.out.println(c.orderTotalPrice);
+            System.out.println(c.amount);
         }
     }
 }
