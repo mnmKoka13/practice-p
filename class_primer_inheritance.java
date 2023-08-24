@@ -6,6 +6,7 @@ import java.util.*;
  */
 
 class Customer {
+    static int countLeftNum = 0;
     int amount;
 
     Customer() {
@@ -24,6 +25,10 @@ class Customer {
 
     public void takeAlcohol() {
         this.takeAlcohol(500);
+    }
+
+    public static void leaveStore() {
+        countLeftNum++;
     }
 }
 
@@ -72,7 +77,13 @@ public class Main {
         for (int i = 0; i < K; i++) {
             int index = sc.nextInt() - 1;
             String order = sc.next();
-            if (!order.equals("0")) {
+            
+            if (order.equals("0")) {
+                customers.get(index).takeAlcohol();
+            } else if (order.equals("A")) {
+                System.out.println(customers.get(index).amount);
+                customers.get(index).leaveStore();
+            } else {
                 int price = sc.nextInt();
                 if (order.equals("food")) {
                     customers.get(index).takeFood(price);
@@ -81,14 +92,9 @@ public class Main {
                 } else {
                     customers.get(index).takeAlcohol(price);
                 }
-            } else {
-                customers.get(index).takeAlcohol();
             }
             
         }
-
-        for (Customer c : customers) {
-            System.out.println(c.amount);
-        }
+        System.out.println(Customer.countLeftNum);
     }
 }
