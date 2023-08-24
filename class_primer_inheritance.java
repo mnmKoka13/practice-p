@@ -21,6 +21,10 @@ class Customer {
     }
 
     public void takeAlcohol(int m) {}
+
+    public void takeAlcohol() {
+        this.takeAlcohol(500);
+    }
 }
 
 class AdultCustomer extends Customer {
@@ -60,7 +64,7 @@ public class Main {
                 AdultCustomer customer = new AdultCustomer();
                 customers.add(customer);
             } else {
-                Customer customer = new AdultCustomer();
+                Customer customer = new Customer();
                 customers.add(customer);
             }
         }
@@ -68,15 +72,19 @@ public class Main {
         for (int i = 0; i < K; i++) {
             int index = sc.nextInt() - 1;
             String order = sc.next();
-            int price = sc.nextInt();
-            
-            if (order.equals("food")) {
-                customers.get(index).takeFood(price);
-            } else if (order.equals("softdrink")) {
-                customers.get(index).takeSoftDrink(price);
+            if (!order.equals("0")) {
+                int price = sc.nextInt();
+                if (order.equals("food")) {
+                    customers.get(index).takeFood(price);
+                } else if (order.equals("softdrink")) {
+                    customers.get(index).takeSoftDrink(price);
+                } else {
+                    customers.get(index).takeAlcohol(price);
+                }
             } else {
-                customers.get(index).takeAlcohol(price);
+                customers.get(index).takeAlcohol();
             }
+            
         }
 
         for (Customer c : customers) {
