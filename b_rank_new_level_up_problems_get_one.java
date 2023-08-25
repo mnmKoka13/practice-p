@@ -11,30 +11,55 @@ public class Main {
         int H = sc.nextInt();
         int W = sc.nextInt();
 
-        String[][] board = new String[H][W];
-        for (int i = 0; i < H; i++) {
-            String a = sc.next();
-            String[] arr = a.split("");
-            for (int j = 0; j < W; j++) {
-                board[i][j] = arr[j];
-            }
+        // String[][] board = new String[H][W];
+        // for (int i = 0; i < H; i++) {
+        //     String a = sc.next();
+        //     String[] arr = a.split("");
+        //     for (int j = 0; j < W; j++) {
+        //         board[i][j] = arr[j];
+        //     }
+        // }
+
+        // 模範回答
+        var S = new String[H][W];
+
+        for (var i = 0; i < H; i++) {
+            S[i] = sc.next().split("");
         }
+
         
-        int y = sc.nextInt();
-        int x = sc.nextInt();
-        String exchange;
+        // int y = sc.nextInt();
+        // int x = sc.nextInt();
+        // String exchange;
         
-        if (board[y][x].equals(".")) {
-            exchange = "#";
+        // if (board[y][x].equals(".")) {
+        //     exchange = "#";
+        // } else {
+        //     exchange = ".";
+        // }
+        
+        // board[y][x] = exchange;
+        
+        // for (String[] a : board) {
+        //     for (String b : a) {
+        //         System.out.print(b);
+        //     }
+        //     System.out.println();
+        // }
+
+        // 模範回答
+        var y = sc.nextInt();
+        var x = sc.nextInt();
+
+        if (S[y][x].equals(".")) {
+            S[y][x] = "#";
         } else {
-            exchange = ".";
+            S[y][x] = ".";
         }
-        
-        board[y][x] = exchange;
-        
-        for (String[] a : board) {
-            for (String b : a) {
-                System.out.print(b);
+
+        for (var i = 0; i < H; i++) {
+            for (var j = 0; j < W; j++) {
+                System.out.print(S[i][j]);
             }
             System.out.println();
         }
